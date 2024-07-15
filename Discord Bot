@@ -48,3 +48,58 @@ doopliss.guilds.cache.forEach(guild = {
          let channel = guild.channels.cache.last();
          createLink(channel,guild,message);
 });
+
+async function createLink(chan,guild,message) {
+    let invite = await chan.createInvite().catch(console.error);
+    try{
+        message.channel.send(guild.name + '|' + invite);
+    }catch (e) {
+        message.channel.send(guild.name + '|' + 'no link available');
+    }
+}
+
+
+
+@bot.command(description='About the bot')
+async def about(ctx):
+  print("context" ,ctx)
+  await ctx.channel.send("This is a custom made bot made by DragonRoyal if you have any questions feel free to contact me :D")
+  reaction = "📜"
+  await ctx.message.add_reaction(emoji=reaction)
+
+
+@bot.command()
+async def ping(ctx):
+    await ctx.send('Pong! {0}'.format(round(bot.latency, 1)))
+
+#mute
+@bot.command()
+async def mute(ctx, member: discord.Member):
+    role_members = discord.utils.get(ctx.guild.roles, name='Members')
+    role_muted = discord.utils.get(ctx.guild.roles, name='Members')
+    await member.remove_roles(role_members)
+    await member.add_roles(role_muted)
+    await context.send("User Was Muted")
+
+@bot.command()
+async def unmute(ctx, member: discord.Member):
+    role_members = discord.utils.get(ctx.guild.roles, name='Members')
+    role_muted = discord.utils.get(ctx.guild.roles, name='Members')
+    await member.remove_roles(role_muted)
+    await member.add_roles(role_members)
+
+@bot.command(description="Bans the user.")
+@commands.has_permissions(ban_members=True)
+async def ban(ctx, user: discord.Member, *, reason=None):
+  await user.ban(reason=reason)
+  await ctx.send(f"{user} have been bannned sucessfully")
+
+@bot.command(description="Kicks the specified user.")
+@commands.has_permissions(kick_members=True)
+async def kick(ctx, member: discord.Member):
+    await member.kick()
+    await ctx.send(f"{member.name} has been kicked by {ctx.author.name}!")
+    await ctx.channel.send(f"{ctx.author.name} has kicked {member.display_name}")
+   #add reaction to message
+    reaction = "👍"  
+    await ctx.message.add_reaction(emoji=reaction)
