@@ -1,0 +1,34 @@
+import math
+a=input("Do you want to do math?")
+while a=="yes" or a=="Yes" or a=="YES" or a==" yes" or a== " YES" or a==" Yes":
+  b=input("What operations do you want to use? addition, subtraction,multiplication, division, square root:")
+  b=b.lower()
+  if b== " multiplication" or b== "multiplication":
+    M=input()
+    print("x")
+    Z=input()
+    print("your product is ",float(M)*float(Z))
+  elif b=="Divison" or b=="divison" or b==" Divison" or b==" divison":
+      M=input()
+      print("/")
+      Z=input()
+      print("\n","Your quotient is ",float(M)/float(Z),"\n")
+  elif b=="Addition" or b=="addition" or b==" Addition" or            b== " addition":
+      M=input()
+      print("+")
+      Z=input()
+      print("your sum is ",float(M)+float(Z))
+  elif b=="subtraction" or b=="Subtraction" or b==" subtraction" or b==" Subtraction":
+      M=input()
+      print("-")
+      Z=input()
+      print("your difference is ",float(M)-float(Z))
+  elif b== " Square Root" or b== " square root" or b== "Square root" or b=="square Root":
+     M=input()
+     print("The square root of ",M,"is",math.sqrt(float(M)))
+  else:
+    print("Please Try again. Operation was not found")
+a=input("Do you want to do math?")
+if a=="NO" or a=="no" or a==" No" or a==" NO" or a==" no" or a =="No":
+    print("Okay, have a nice day!")
+  
