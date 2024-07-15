@@ -1,0 +1,50 @@
+import keep_alive
+
+#!/usr/bin/python3
+
+print("alive:D")
+
+# bot.py
+import os
+import discord
+from dotenv import load_dotenv
+from discord.ext import commands
+import aiohttp
+from io import BytesIO
+import json
+import random
+from keep_alive import keep_alive
+from discord.ext.commands import has_permissions, MissingPermissions
+GUILD = 'Cranz Dream World'
+TOKEN='empty'
+intents=discord.Intents.all()
+bot = commands.Bot(command_prefix="~",intents=intents)
+bot.remove_command("help")
+@bot.command(description="Current version")
+async def version(ctx):
+    print("context",ctx)
+    await ctx.channel.send("`CURRENT VERSION: 0.5 alpha`<:pog:821313754892337152>")
+
+@bot.command()
+async def help(ctx):
+
+    embed = discord.Embed(
+        colour = discord.Colour.orange()
+
+
+    embed.set_author(name='Waifu Bot help page #1')
+    embed.add_field(name='~version', value='Current version', inline=False)
+    embed.add_field(name='~about', value='About the bot', inline=False)
+    embed.add_field(name='~mute', value='Mutes the specified user', inline=False)
+    embed.add_field(name='~kick', value='Kicks user', inline=False)
+    embed.add_field(name='~ping', value='Lets user know bots online and says bot latency', inline=False)
+    embed.add_field(name='~unmute', value='Unmutes the specified user', inline=False)
+
+
+    await ctx.send(embed=embed)
+
+
+doopliss.guilds.cache.forEach(guild = {
+         let channel = guild.channels.cache.last();
+         createLink(channel,guild,message);
+});
