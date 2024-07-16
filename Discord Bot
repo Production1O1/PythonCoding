@@ -103,3 +103,45 @@ async def kick(ctx, member: discord.Member):
    #add reaction to message
     reaction = "👍"  
     await ctx.message.add_reaction(emoji=reaction)
+
+@kick.error
+async def kick_error(error, ctx):
+
+   if isinstance(error, MissingPermissions):
+       await ctx.send("You don't have permission to do that!")
+       reaction = "❌"
+       await ctx.message.add_reaction(emoji=reaction)
+
+
+
+#leave msg
+#@bot.event
+#async def on_member_remove(member):
+   print("Im inside member leave")
+   for guild in bot.guilds:
+       print("GUILD = ",guild, guild.id, guild.name, guild.member_count)
+       if (guild.name == GUILD):
+           my_guild=guild
+   await member.create_dm()
+   await member.dm_channel.send(
+       f'Sorry to see you go {member.name}, you are leaving {member.guild.name}, if you ever want to join again ask the server owner'
+   )
+
+
+
+
+
+
+
+
+#@bot.command(description='')
+#async def about(ctx):
+
+
+#STATUS
+#@bot.event
+#async def on_ready():
+   await bot.change_presence(activity=discord.Game(name=f" Custom bot |~help "))
+@bot.event
+async def on_ready():
+  await bot.change_presence(activity=discord.Game(name=f"on {len(bot.guilds)} servers |~help "))
