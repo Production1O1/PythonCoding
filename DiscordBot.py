@@ -493,3 +493,31 @@ async def sell_this(user,item_name,amount,price = None):
     users = await get_bank_data()
 
     bal = await update_bank(user)
+
+
+
+    try:
+        index = 0
+        t = None
+        for thing in users[str(user.id)]["bag"]:
+            n = thing["item"]
+            if n == item_name:
+                old_amt = thing["amount"]
+                new_amt = old_amt - amount
+                if new_amt < 0:
+                    return [False,2]
+                users[str(user.id)]["bag"][index]["amount"] = new_amt
+                t = 1
+                break
+            index+=1
+        if t == None:
+            return [False,3]
+    except:
+        return [False,3]    
+
+    with open("mainbank.json","w") as f:
+        json.dump(users,f)
+
+    await update_bank(user,cost,"wallet")
+
+    return [True,"Worked"]
