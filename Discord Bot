@@ -292,3 +292,44 @@ async def send(ctx,member : discord.Member,amount = None):
     await update_bank(member,amount,'bank')
     await ctx.send(f'{ctx.author.mention} You gave {member} {amount} coins')
 
+@bot.command(aliases=['rb'])
+async def rob(ctx,member : discord.Member):
+    await open_account(ctx.author)
+    await open_account(member)
+    bal = await update_bank(member)
+
+
+    if bal[0]<100:
+        await ctx.send('It is useless to rob him :(')
+
+
+
+    earning = random.randrange(0,bal[0])
+
+    await update_bank(ctx.author,earning)
+    await update_bank(member,-1*earning)
+    await ctx.send(f'{ctx.author.mention} You robbed {member} and got {earning} coins')
+
+
+@bot.command()
+async def slots(ctx,amount = None):
+    await open_account(ctx.author)
+    if amount == None:
+        await ctx.send("Please enter the amount")
+        return
+
+    bal = await update_bank(ctx.author)
+
+    amount = int(amount)
+
+    if amount > bal[0]:
+        await ctx.send('You do not have sufficient balance')
+        return
+    if amount < 0:
+        await ctx.send('Amount must be positive!')
+        return
+    final = []
+    for i in range(3):
+        a = random.choice(['X','O','Q'])
+
+
