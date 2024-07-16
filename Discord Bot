@@ -251,3 +251,44 @@ async def deposit(ctx,amount = None):
     if amount == None:
         await ctx.send("Please enter the amount")
         return
+bal = await update_bank(ctx.author)
+
+    amount = int(amount)
+
+    if amount > bal[0]:
+        await ctx.send('You do not have sufficient balance')
+        return
+    if amount < 0:
+        await ctx.send('Amount must be positive!')
+        return
+
+    await update_bank(ctx.author,-1*amount)
+    await update_bank(ctx.author,amount,'bank')
+    await ctx.send(f'{ctx.author.mention} You deposited {amount} coins')
+
+
+@bot.command(aliases=['sm'])
+async def send(ctx,member : discord.Member,amount = None):
+    await open_account(ctx.author)
+    await open_account(member)
+    if amount == None:
+        await ctx.send("Please enter the amount")
+        return
+
+    bal = await update_bank(ctx.author)
+    if amount == 'all':
+        amount = bal[0]
+
+    amount = int(amount)
+
+    if amount > bal[0]:
+        await ctx.send('You do not have sufficient balance')
+        return
+    if amount < 0:
+        await ctx.send('Amount must be positive!')
+        return
+
+    await update_bank(ctx.author,-1*amount,'bank')
+    await update_bank(member,amount,'bank')
+    await ctx.send(f'{ctx.author.mention} You gave {member} {amount} coins')
+
