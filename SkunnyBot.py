@@ -145,3 +145,72 @@ async def changeprefix(ctx, prefix):
 
     await ctx.send(f"The prefix was changed to {prefix}")
 
+
+
+
+@bot.event
+async def on_command_error(ctx: commands.Context, error: commands.CommandError):
+    if isinstance(error, commands.CommandNotFound):
+        embed = discord.Embed(colour = discord.Colour.random())
+        embed.set_author(name='Error 404')
+        embed.add_field(name='||The commands not even a command. +help exists for a reason||',value="...")
+        embed.set_footer(text ='404')
+        await ctx.send(embed=embed)
+
+    elif isinstance(error, commands.TooManyArguments):
+        embed = discord.Embed(colour = discord.Colour.random())
+        embed.set_author(name='Too many letters/char')
+        embed.add_field(name='The command you did had more then 256 letters/char discord limit is 256 thats why command did not work',value="...")
+        embed.set_footer(text ='Too many arguements')
+        await ctx.send(embed=embed)
+    elif isinstance(error, commands.CommandOnCooldown):
+        msg = '**Command is still on cooldown**, try again in {:.2f}s'.format(error.retry_after)
+        await ctx.send(msg)
+
+    elif isinstance(error, commands.MissingPermissions):
+        embed = discord.Embed(colour = discord.Colour.random())
+        embed.set_author(name='Permissions error')
+        embed.add_field(name='Imagine thinking you can just get away with doing a perms needed command with no perms',value='...')
+        embed.set_footer(text ='Why did you think you could do that.')
+        await ctx.send(embed=embed)
+
+        message = "You are missing the required permissions to run this command!"
+    elif isinstance(error, commands.UserInputError):
+        embed = discord.Embed(colour = discord.Colour.random())
+        embed.set_author(name='Input error')
+        embed.add_field(name='Something about your input was wrong.. just check your input and try again, You may have forgot to add a other arg, ex: +bet instead of +bet 59',value='...')
+        embed.set_footer(text ='Imagine getting a error msg')
+        await ctx.send(embed=embed)
+    elif isinstance(error,commands.NotOwner):
+        embed = discord.Embed(colour = discord.Colour.random())
+        embed.set_author(name='Why just why...')
+        embed.add_field(name='||You did a bot dev only command and thought it could work?||',value='...')
+        embed.set_footer(text ='Why did you think you could do that.')
+        await ctx.send(embed=embed)
+    elif isinstance(error,commands.BotMissingPermissions):
+        embed = discord.Embed(colour = discord.Colour.random())
+        embed.set_author(name='Missing Bot perms')
+        embed.add_field(name='StonkBot is missing the required permissions for the command to work, give it the proper perms or admin',value='...')
+        embed.set_footer(text ='Did you forget to add the bot some perms?')
+        await ctx.send(embed=embed)
+
+    elif isinstance(error,commands.MissingRequiredArgument):
+        embed = discord.Embed(colour = discord.Colour.random())
+        embed.set_author(name='Missing arguement')
+        embed.add_field(name='You forgot to add a arguement',value='...')
+        embed.set_footer(text ='Hello fellow humans')
+        await ctx.send(embed=embed)
+
+    elif isinstance(error,commands.BadArgument):
+        embed = discord.Embed(colour = discord.Colour.random())
+        embed.set_author(name='Missing arguement')
+        embed.add_field(name='You forgot to add a arguement',value='...')
+        embed.set_footer(text ='Hello fellow humans')
+        await ctx.send(embed=embed)
+
+    else:
+        embed = discord.Embed(colour = discord.Colour.random())
+        embed.add_field(name='You managed to get a error I didnt even expect..',value='...')
+        embed.set_footer(text ='how did you do it?')
+        await ctx.send(embed=embed)
+        raise error
