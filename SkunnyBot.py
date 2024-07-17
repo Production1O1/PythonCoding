@@ -214,3 +214,56 @@ async def on_command_error(ctx: commands.Context, error: commands.CommandError):
         embed.set_footer(text ='how did you do it?')
         await ctx.send(embed=embed)
         raise error
+
+@bot.command()
+async def invite(ctx):
+  embed = discord.Embed(
+    colour = discord.Colour.red()
+  )
+  embed.set_author(name='Invite')
+  embed.add_field(name='▼▼▼▼', value='[Bot invite](https://bit.ly/3tw374r)')
+  embed.set_thumbnail(url="https://pbs.twimg.com/profile_images/1149577551708184576/6KG41LLu_400x400.jpg")
+  embed.set_footer(text ='Stop it, get some help.')
+  await ctx.send(embed=embed)
+
+
+
+
+
+
+
+
+
+
+
+#@slash.slash(name="test",
+ #            description="This is just a test command, nothing more.")
+#async def test(ctx):
+ # await ctx.send(content="Hello World!")
+async def ch_pr():
+    await bot.wait_until_ready()
+    statuses=[f'{len(bot.guilds)} servers','Stonks|+help','Doge coin', 'mass murders',]
+    while not bot.is_closed():
+        status = random.choice(statuses)
+
+        await bot.change_presence(activity=discord.Activity(type=discord.ActivityType.watching, name=status))
+        await asyncio.sleep(10)
+bot.loop.create_task(ch_pr())
+
+
+# @bot.command()
+# async def stats(self, ctx):
+#         embed = discord.Embed(title = f"{self.bot.user.name}'s botinfo.",  color = discord.Colour.dark_green())
+#         ramUsage = self.process.memory_full_info().rss / 1024**2
+#         embed.add_field(name="• Name:", value=f"`{self.bot.user}`",inline=True)
+#         embed.add_field(name="• Id", value=f"`829836500970504213`")
+#         embed.add_field(name="• Intents", value=f"`{self.bot.intents}`")
+#         embed.add_field(name="• Python Version", value=f"`{platform.__version__}`")
+#         embed.add_field(name="• Discord.py Version", value=f"`{discord.__version__}`")
+#         embed.add_field(name="• Total Servers", value=f"`{len(self.bot.guilds)}`")
+#         embed.add_field(name="• Total Members", value=f"`{len(self.bot.users)}`")
+#         embed.add_field(name="• Total Commands", value=f"`{len(set(self.bot.commands))}`")
+#         embed.add_field(name="• Total Cogs", value=f"`{len(set(self.bot.cogs))}`")
+#         embed.add_field(name="• RAM", value=f"`{ramUsage:.2f} MB`")
+#         embed.set_footer(text = f"Requested by {ctx.author})", icon_url = ctx.author.avatar_url)
+#         await ctx.send(embed = embed)
