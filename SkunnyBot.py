@@ -322,3 +322,61 @@ async def afg(ctx,role: discord.Role, user: discord.Member):
 
 #reddit = asyncpraw.Reddit(client_id ='OK4gxau76j-sPw',
 #client_secret ='QqSS9K4UN9KFItLXFxJWRxBZ1GRsMQ', user_agent = 'praw', username ='Dragonroyal', password = 'savecup11',)
+
+#subreddit = reddit.subreddit('memes')
+#top = subreddit.top(Limit = 5)
+#for submisson  in top:
+#  print(submission.title)
+
+#print("F")
+#@bot.command()
+#async def memeswork(ctx):
+ # print("Ff")
+  #subreddit = reddit.subreddit('memes')
+  #top = subreddit.top(Limit = 50)
+  #all_subs =[]
+  #for submission in top:
+   # all_subs.append(submission)
+    #print("FFf")
+
+  #random_sub = random.choice(all_subs)
+  #print("fffds")
+  #name = random_sub.title
+  #url = random_sub.url
+  #em = discord.Embed(title=name)
+  #em.set_image(url=url)
+  #print("ejksjs")
+  #await ctx.send(embed = em)
+
+
+#@bot.command()
+#async def memef(ctx):
+ #   memes_submissions = reddit.subreddit('memes').hot()
+  #  post_to_pick = random.randint(1, 10)
+  #  for i in range(0, post_to_pick):
+  #      submission = next(x for x in memes_submissions if not x.stickied)
+
+   # await bot.say(submission.url)
+
+
+
+#who is command
+@bot.command(aliases=["user","info"])
+async def whois(ctx, member:discord.Member=None):
+
+    if member is None:
+        member = ctx.author
+    user = member
+    roles = [role for role in member.roles]
+    allroles = [role.mention for role in roles[1:]]
+    embed = discord.Embed(title = member.name , describtion = member.mention ,color = discord.Color(0x7289DA))
+    embed.add_field(name="Display Name:", value=member.display_name)
+    embed.add_field(name = "ID", value = member.id , inline = True)
+    embed.add_field(name="Created Account On:", value=member.created_at.strftime("%a, %#d %B %Y, %I:%M %p UTC"))
+    embed.add_field(name="Joined Server On:", value=member.joined_at.strftime("%a, %#d %B %Y, %I:%M %p UTC"))
+    embed.add_field(name=f"Roles (amount: {len(roles)}):", value="\n".join(allroles))
+    embed.add_field(name="Highest Role:", value=f"{member.top_role.mention if member.top_role else 'N/A'}")
+    embed.set_thumbnail(url = member.avatar_url)
+    embed.set_footer(icon_url = ctx.author.avatar_url, text =   f"Requested by {ctx.author.name}")
+    await ctx.send(embed=embed)
+
