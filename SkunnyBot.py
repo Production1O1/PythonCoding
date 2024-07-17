@@ -267,3 +267,58 @@ bot.loop.create_task(ch_pr())
 #         embed.add_field(name="• RAM", value=f"`{ramUsage:.2f} MB`")
 #         embed.set_footer(text = f"Requested by {ctx.author})", icon_url = ctx.author.avatar_url)
 #         await ctx.send(embed = embed)
+
+
+
+
+
+
+
+@bot.command(pass_context=True)
+async def afg(ctx,role: discord.Role, user: discord.Member):
+  await user.add_roles(role)
+  await ctx.send("f")
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#@bot.command()
+#async def meme(ctx):
+ #   async with aiohttp.BotSession() as cs:
+  #    async with cs.get('https://www.reddit.com/r/dankmemes/new.json?sort=top') or cs.get('https://www.reddit.com/r/memes/new.json?sort=top') or cs.get('https://www.reddit.com/r/programmingmemes/new.json?sort=top') or cs.get('https://www.reddit.com/r/cleanmemes/new.json?sort=top') as r:
+   #     res = await r.json()
+
+    #num = random.randint(0, len(res['data']['children'])-1)
+
+    #m = res['data']['children'] [num]['data']['url']
+    #e = Embed(description = f"**[{res['data']['children'] [num]['data']['title']}]({m})**", color=amberz)
+   # e.set_footer(text= res['data']['children'] [num]['data']['author'], icon_url=ctx.guild.icon_url)
+    #e.set_image(url = res['data']['children'] [num]['data']['url'])
+   # await ctx.send(embed=e)
+
+
+
+
+
+
+
+
+
+#--------------REDDIT MEME GENERATION!----------------
+# wont work
+
+
+
+#reddit = asyncpraw.Reddit(client_id ='OK4gxau76j-sPw',
+#client_secret ='QqSS9K4UN9KFItLXFxJWRxBZ1GRsMQ', user_agent = 'praw', username ='Dragonroyal', password = 'savecup11',)
