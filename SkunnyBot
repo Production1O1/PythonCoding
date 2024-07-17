@@ -1,0 +1,50 @@
+#!/usr/bin/python3
+print("SKUNNY:D")
+
+# bot.py
+import sys
+from operator import truediv
+import os
+import discord
+from discord import embeds
+from discord_components import DiscordComponents, Button, Select, SelectOption
+from discord import member
+from discord import message
+#from dotenv import load_dotenv
+from discord.ext import commands
+import discord
+from io import BytesIO
+from usefull.rickroll import *
+import json
+import random
+#from utils.useful import Embed
+import DiscordUtils
+#from keep_alive import keep_alive
+from discord.ext.commands import *
+import json
+import asyncio
+from discord import Permissions
+from datetime import *
+#from prsaw import RandomStuff
+#import prsaw
+
+
+from discord import Color, Embed
+import sys
+import typing
+import traceback
+
+import requests
+import math
+import re
+import aiosqlite
+from PIL import Image
+import asyncpraw
+import tracemalloc
+tracemalloc.start()
+from discord.ext.commands import has_permissions, MissingPermissions
+from discord.utils import find
+from discord.voice_client import VoiceClient
+import youtube_dl
+import aiohttp
+import urllib.parse
