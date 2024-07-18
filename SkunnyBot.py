@@ -457,3 +457,65 @@ async def on_message(message):
         await bot.process_commands(message)
     if bot.user == message.author:
       return
+
+
+
+    else:
+        if message.channel.name == 'chatbot' or message.channel.name =='⭐・chat・bot' or message.channel.name =='ai':
+            msg = message.content
+            key = 'hNU9gUhSU5t8'
+            header = {"x-api-key": key}
+            type = "stable"
+
+            params = {'type':type , 'message':msg, 'dev_name': "DragonRoyal", 'bot_name': "Stonk Bot"}
+            async with aiohttp.ClientSession(headers=header) as session:
+                async with session.get(f'https://api.pgamerx.com/v3/ai/response', params=params) as resp:
+
+                    text = await resp.json()
+                em = discord.Embed(title = text[0]["message"], color= discord.Color.random())
+                em.set_footer(icon_url = message.author.avatar_url,text = f"Said to: {message.author.name}. Consider doing +vote")
+                await bot.process_commands(message)
+                await message.reply(embed = em)
+        else:
+            for i in message.content.split(" "):
+                i = i.replace("<","").replace(">", "") #Removes <> that could be used to hide embeds
+                if "https://" in i and await detector.find(i):
+                    await message.add_reaction("<a:rickroll:866402530858631179>")
+                    break
+
+
+
+    await bot.process_commands(message)
+
+
+
+# @bot.event
+# async def on_message(message):
+#     if bot.user == message.author:
+#         return
+#     if message.channel.name == 'chatbot' or message.channel.name =='⭐・chat・bot' or message.channel.name =='ai':
+#         rs= randomstuff.Client(api_key='hNU9gUhSU5t8',)
+#         response = rs.get_ai_response(message)
+#         em = discord.Embed(title = response.message,color=discord.Color.random())
+#         em.set_footer(icon_url = message.author.avatar_url,text = f"Said to: {message.author.name}. Consider voting for this bot in top.gg")
+#         await message.reply(embed=em)
+
+    #await bot.process_commands(message)
+@bot.command() # Normal message wait_for
+async def chatbot(ctx):
+
+    await ctx.send("Do you want me to automatically setup chatbot?`(y/n)`")
+    msg = await bot.wait_for('message', timeout=600)
+    if msg.content == 'y':
+        await ctx.send("In what catagory do you want me to set it up? say NONE if you dont care")
+        msg = await bot.wait_for('message',timeout=600)
+        if msg.content == 'NONE':
+            guild = ctx.message.guild
+            await guild.create_text_channel('chatbot')
+            await ctx.send("Made the channel! #chatbot")
+        else:
+            await ctx.send('ok')
+
+
+    else:
+        await ctx.send("Ok I wont")
