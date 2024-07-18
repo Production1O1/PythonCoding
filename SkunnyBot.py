@@ -519,3 +519,75 @@ async def chatbot(ctx):
 
     else:
         await ctx.send("Ok I wont")
+
+#            
+
+
+
+
+
+@bot.command()
+async def hi(ctx):
+    await ctx.send("it worked")
+
+
+
+    # @commands.command()
+    # async def play(self, ctx, *, song=None):
+    #     if song is None:
+    #         return await ctx.send("You must include a song to play.")
+
+    #     if ctx.voice_client is None:
+    #         return await ctx.send("I must be in a voice channel to play a song.")
+
+    #     # handle song where song isn't url
+    #     if not ("youtube.com/watch?" in song or "https://youtu.be/" in song):
+    #         await ctx.send("Searching for song, this may take a few seconds.")
+
+    #         result = await self.search_song(1, song, get_url=True)
+
+    #         if result is None:
+    #             return await ctx.send("Sorry, I could not find the given song, try using my search command.")
+
+    #         song = result[0]
+
+    #     if ctx.voice_client.source is not None:
+    #         queue_len = len(self.song_queue[ctx.guild.id])
+
+    #         if queue_len < 10:
+    #             self.song_queue[ctx.guild.id].append(song)
+    #             return await ctx.send(f"I am currently playing a song, this song has been added to the queue at position: {queue_len+1}.")
+
+    #         else:
+    #             return await ctx.send("Sorry, I can only queue up to 10 songs, please wait for the current song to finish.")
+
+    #     await self.play_song(ctx, song)
+    #     await ctx.send(f"Now playing: {song}")
+
+
+
+
+#os.system('python website.py')
+
+# @bot.event
+# async def on_ready():
+#    await dbl.serverCountPost()
+#   print(x)
+
+player1 = ""
+player2 = ""
+turn = ""
+gameOver = True
+
+board = []
+
+winningConditions = [
+    [0, 1, 2],
+    [3, 4, 5],
+    [6, 7, 8],
+    [0, 3, 6],
+    [1, 4, 7],
+    [2, 5, 8],
+    [0, 4, 8],
+    [2, 4, 6]
+]
