@@ -380,3 +380,30 @@ async def whois(ctx, member:discord.Member=None):
     embed.set_footer(icon_url = ctx.author.avatar_url, text =   f"Requested by {ctx.author.name}")
     await ctx.send(embed=embed)
 
+
+
+
+@bot.command()
+async def botservers(ctx):
+    await ctx.send("I'm in " + str(len(bot.guilds)) + " servers!")
+
+
+
+
+
+@bot.command()
+@commands.cooldown(1, 10, commands.BucketType.user)
+async def stonkrules(ctx):
+  embed = discord.Embed(color = discord.Color(0x36393E))
+  embed.set_author(name='Rules📓')
+  embed.add_field(name='1.', value=' Please dont talk about religion or politics. People can be really sensitive about this stuff, so dont do it here, thanks!')
+  embed.add_field(name='2.', value='No NSFW, sexist, racist, homophobic, transphobic, misogynistic or inappropriate content or anything remotely similar. Respect people, its the 21st century. This includes any slurs.')
+  embed.add_field(name='3.', value='Causing drama is an instant punishment. Its simple, please dont.',)
+  embed.add_field(name='6', value='Attempting to override a punishment or using alternate accounts will lead to all your accounts being banned. This includes leaving to bypass a mute.',)
+  embed.add_field(name='7', value='Please keep discussion in English only. This includes voice chats.',)
+  embed.add_field(name='8', value='Dont spam or use copy pastes here. Theyre not nice and make chat hard to manage.')
+  embed.add_field(name='9', value='Dont Adv in wrong channels. Anything considered Adv is links that are unrelated to the convo topic and are meant to promote the users content, in short just try not to post any links',)
+  embed.add_field(name='10', value='Common sense. Use common sense')
+  embed.set_thumbnail(url="https://pbs.twimg.com/profile_images/1149577551708184576/6KG41LLu_400x400.jpg")
+  embed.set_footer(text="Imagine not voting for this bot in top.gg")
+  await ctx.send(embed=embed)
