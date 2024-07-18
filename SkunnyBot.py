@@ -407,3 +407,53 @@ async def stonkrules(ctx):
   embed.set_thumbnail(url="https://pbs.twimg.com/profile_images/1149577551708184576/6KG41LLu_400x400.jpg")
   embed.set_footer(text="Imagine not voting for this bot in top.gg")
   await ctx.send(embed=embed)
+
+# async def on_message(message):
+#   if bot.user == message.author:
+#     return
+#   if message.channel.id == 842336034431827988:
+#     msg = message.content
+#     key = os.getenv('key')
+#     header = {"x-api-key": key}
+#     dev_name = "ChaoticNebula"
+#     type = "stable"
+#     params = {'type':type , 'message':msg, 'dev_name': "ChaoticNebula", 'bot_name': "Ai Chat"}
+#     async with aiohttp.ClientSession(headers=header) as session:
+#       async with session.get(f'https://api.pgamerx.com/v3/ai/response', params=params) as resp:
+#         text = await resp.json()
+#         await message.channel.send(text[0]["message"])
+#   else:
+#     pass
+
+
+#test
+#if this works then WOW
+
+
+
+@bot.event
+async def on_guild_join(guild):
+    general = find(lambda x: x.name == 'general',  guild.text_channels)
+    if general and general.permissions_for(guild.me).send_messages:
+        await general.send('Hello {}! My prefix is + Do +help to learn more about my commands. To setup my chatbot name a channel chatbot for chatbot to work'.format(guild.name))
+
+
+
+
+# #supergoodchatbotbutnoembed
+@bot.event
+async def on_message(message):
+    mention = f'<@!{bot.user.id}>'
+    if mention in message.content:
+        with open("prefixes.json", "r") as f:
+            prefixes = json.load(f)
+        try:
+            a=prefixes[str(message.guild.id)]
+        except KeyError:
+            a="+"    
+            em = discord.Embed(title=a,color=discord.Color.random())
+            em.set_author(name='Incase you dont know my prefix its')
+            await message.channel.send(embed=em)
+        await bot.process_commands(message)
+    if bot.user == message.author:
+      return
