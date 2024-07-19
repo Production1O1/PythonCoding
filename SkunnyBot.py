@@ -698,3 +698,50 @@ async def end(ctx):
     em = discord.Embed(title='No games running...',color=discord.Color.random())
     em.set_footer(text="A game was not even running lol")
     await ctx.send(embed=em)
+
+
+
+
+def checkWinner(winningConditions, mark):
+    global gameOver
+    for condition in winningConditions:
+        if board[condition[0]] == mark and board[condition[1]] == mark and board[condition[2]] == mark:
+            gameOver = True
+
+@tictactoe.error
+async def tictactoe_error(ctx, error):
+    print(error)
+    if isinstance(error, commands.MissingRequiredArgument):
+        await ctx.send("Please mention 2 players for this command.")
+    elif isinstance(error, commands.BadArgument):
+        await ctx.send("Please make sure to mention/ping players (ie. <@688534433879556134>).")
+
+@place.error
+async def place_error(ctx, error):
+    if isinstance(error, commands.MissingRequiredArgument):
+        await ctx.send("Please enter a position you would like to mark.")
+    elif isinstance(error, commands.BadArgument):
+        await ctx.send("Please make sure to enter an integer.")
+
+#host = GameHost('*')
+#host.add_game(Snake)
+#bot ping work\
+
+
+# @bot.event
+# async def on_message(message):
+#     await bot.process_commands(message)
+#     mention = f'<@!{bot.user.id}>'
+#     with open("prefixes.json", "r") as f:
+#         prefixes = json.load(f)
+#     try:
+#        a=prefixes[str(message.guild.id)]
+#     except KeyError:
+#       a="+"
+
+#     if mention in message.content:
+#         em = discord.Embed(title=a,color=discord.Color.random())
+#         em.set_author(name='Incase you dont know my prefix its')
+#         await message.channel.send(embed=em)
+#     await bot.process_commands(message)
+#     pass
