@@ -633,3 +633,68 @@ async def tictactoe(ctx, p1: discord.Member, p2: discord.Member):
         em = discord.Embed(title='A game is already in progress! Finish it or end the current game using +end before starting a new one',color=discord.Color.random())
         em.set_footer(text="a game was already running")
         await ctx.send(embed=em)
+
+
+
+@bot.command()
+async def place(ctx, pos: int):
+    global turn
+    global player1
+    global player2
+    global board
+    global count
+    global gameOver
+
+    if not gameOver:
+        mark = ""
+        if turn == ctx.author:
+            if turn == player1:
+                mark = ":regional_indicator_x:"
+            elif turn == player2:
+                mark = ":o2:"
+            if 0 < pos < 10 and board[pos - 1] == ":white_large_square:" :
+                board[pos - 1] = mark
+                count += 1
+
+                # print the board
+                line = ""
+                for x in range(len(board)):
+                    if x == 2 or x == 5 or x == 8:
+                        line += " " + board[x]
+                        await ctx.send(line)
+                        line = ""
+                    else:
+                        line += " " + board[x]
+
+                checkWinner(winningConditions, mark)
+
+                if gameOver == True:
+                    await ctx.send(mark + " wins!")
+                elif count >= 9:
+                    gameOver = True
+                    await ctx.send("It's a tie!")
+
+                # switch turns
+                if turn == player1:
+                    turn = player2
+                elif turn == player2:
+                    turn = player1
+            else:
+                await ctx.send("Be sure to choose an integer between 1 and 9 (inclusive) and an unmarked tile.")
+        else:
+            await ctx.send("It is not your turn.")
+    else:
+        await ctx.send("Please start a new game using the !tictactoe command.")
+
+@bot.command()
+async def end(ctx):
+  global gameOver
+  if not gameOver:
+    gameOver = True
+    em = discord.Embed(title='Stopping game..',color=discord.Color.random())
+    em.set_footer(text="How about you do +vote 😏")
+    await ctx.send(embed=em)
+  else:
+    em = discord.Embed(title='No games running...',color=discord.Color.random())
+    em.set_footer(text="A game was not even running lol")
+    await ctx.send(embed=em)
