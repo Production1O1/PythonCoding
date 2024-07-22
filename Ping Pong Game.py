@@ -34,19 +34,53 @@ Ball.shape("circle")
 Ball.color("white")
 Ball.penup()
 Ball.goto(0,0)
+Ball.dx = 0.10
+Ball.dy = 0.10
 
-#Function
+#Function Paddle A
 def paddle_a_up():
      y = paddle_a.ycor()
      y += 20
      paddle_a.sety(y)
 
-#keybord binding
+def paddle_a_down():
+     y = paddle_a.ycor()
+     y -= 20
+     paddle_a.sety(y)
+#Function Paddle B
+def paddle_b_up():
+     y = paddle_b.ycor()  # Use paddle_b.ycor() here
+     y += 20
+     paddle_b.sety(y)
+
+def paddle_b_down():
+     y = paddle_b.ycor()  # Use paddle_b.ycor() here
+     y -= 20
+     paddle_b.sety(y)
+
+
+#keybord binding Paddle A
 wn.listen()
-wn.onkey
-
-
+wn.onkeypress(paddle_a_up, "w")
+wn.onkeypress(paddle_a_down, "s")
+#Keybodr binding Paddle B
+wn.onkeypress(paddle_b_up, "Up")
+wn.onkeypress(paddle_b_down, "Down")
 
 #main game loop
 while True:
+    #move the ball
+    Ball.setx(Ball.xcor() + Ball.dx)
+    Ball.sety(Ball.ycor() + Ball.dy)
+
+    #Border Checking (Bounce of border)
+    if Ball.ycor() > 290:
+         Ball.sety(290)
+         Ball.dy *= -1
+
+    #if Ball.ycor() > -290:
+              #Ball.sety(-290)
+              #Ball.dy *= -1
+
+    #Update the screen
     wn.update()
